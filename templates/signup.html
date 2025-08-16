@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Library Signup</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/signup.css' %} ">
+  {% comment %} <link rel="stylesheet" href="signup.css"> {% endcomment %}
+</head>
+<body>
+
+  <div class="container">
+    <div class="signup-box">
+         <a href="{% url 'home' %}" class="close-btn" title="Back to Home">&times;</a>
+        {% comment %} <a href="home.html" class="close-btn" title="Back to Home">&times;</a> {% endcomment %}
+
+
+      <h2>Create Your Library Account</h2>
+      <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+            <label for="num">Mobile no</label>
+            <input type="number" id="phone_num" name="phone_num" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <div class="form-group">
+          <label for="password2">Confirm Password</label>
+          <input type="password" id="password2" name="password2" required />
+        </div>
+        <button type="submit" class="signup-btn">Sign Up</button>
+      </form>
+      <div class="extra-links">
+        <p>Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InfoHub</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static '\css\homestyle.css' %} ">
+    {% comment %} <link rel="stylesheet" href="homestyle.css"> {% endcomment %}
+</head>
+<body>
+     <!-- Navbar -->
+  <div class="navbar">
+    {% comment %} <div>
+      <img class="logoimg" src ="{% static '\images\logo.jpeg' %}">
+    </div> {% endcomment %}
+    <div class="logo">InfoHub</div>
+    <div>
+      {% if request.session.user_id %}
+      {% comment %} <span>Welcome, {{ request.session.username }}</span> {% endcomment %}
+      <a href="{% url 'logout' %}">Logout</a>
+      <a href="{% url 'dashboard' %}">Dashboard</a>
+      {% else %}
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'signup' %}">Sign Up</a>
+      {% endif %}
+    </div>
+  </div>
+
+  <section class="hero">
+    <h1>Welcome to InfoHub Library</h1>
+    <p>Search, borrow, and manage books easily with our online library system.</p>
+    <a href="{% url 'catalog' %}"><button class="btn">Explore Catalog</button></a>
+    {% comment %} <a href="catalog.html"><button class="btn">Explore Catalog</button></a> {% endcomment %}
+  </section>
+
+  <section class="features">
+    <div class="feature">
+      <h3>Search Books</h3>
+      <p>Quickly find books by title, author, or category with our powerful search engine.</p>
+    </div>
+    <div class="feature">
+      <h3>Borrow Online</h3>
+      <p>Reserve and borrow books without waiting in queues—it's all online.</p>
+    </div>
+    <div class="feature">
+      <h3>Track Returns</h3>
+      <p>View your due dates, track borrowed books, and avoid late fees easily.</p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    &copy; 2025 InfoHub Library. All rights reserved.
+  </footer>
+
+</body>
+</html>

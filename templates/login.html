@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Library Login</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css\logstyle.css' %} ">
+  {% comment %} <link rel="stylesheet" href="logstyle.css"> {% endcomment %}
+</head>
+<body>
+
+  <div class="container">
+    <div class="login-box">
+      <a href="{% url 'home' %}" class="close-btn" title="Back to Home">&times;</a>
+       {% comment %} <a href="home.html" class="close-btn" title="Back to Home">&times;</a> {% endcomment %}
+
+      <h2>Login to Your Account</h2>
+      <form method="POST" >
+        {% csrf_token %}
+        {% comment %} <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required /> {% endcomment %}
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required />
+        </div>
+        <button type="submit" class="login-btn">Login</button>
+        <div class="extra-links">
+        <p>Don't have an account? <a href="{% url 'signup' %}">Sign up here</a></p>
+      </form>
+      <br>
+      {% for message in messages %}
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+      </div>
+      {% endfor %}
+        {% comment %} <p>Don't have an account? <a href="signup.html">Create Account</a></p> {% endcomment %}
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

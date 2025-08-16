@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard</title>
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+
+  <header class="header">
+    <h1>Welcome, {{ request.session.username }}</h1>
+    <p>Your Personal Library Dashboard</p>
+  </header>
+
+  <div class="container">
+
+    <h2>Borrowed Books</h2>
+    {% if borrowed_books %}
+    <table>
+      <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Borrowed On</th>
+        <th>Due Date</th>
+        <th>Status</th>
+        <th>Fine</th>
+      </tr>
+      {% for borrow in borrowed_books %}
+      <tr>
+        <td>{{ borrow.book.title }}</td>
+        <td>{{ borrow.book.author }}</td>
+        <td>{{ borrow.borrow_date|date:"d M Y" }}</td>
+        <td>{{ borrow.due_date|date:"d M Y" }}</td>
+        <td>
+          {% if borrow.is_overdue %}
+            <span style="color:red;">Overdue</span>
+          {% else %}
+            On Time
+          {% endif %}
+        </td>
+        <td>
+          {% if borrow.is_overdue %}
+            ₹{{ borrow.fine_amount }}
+          {% else %}
+            ₹0
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </table>
+    {% else %}
+    <div class="no-data">No books currently borrowed.</div>
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="btn"><button >Back to Home</button></a>
+  </div>
+
+  <footer>
+    &copy; 2025 InfoHub Library. All rights reserved.
+  </footer>
+
+</body>
+</html>
